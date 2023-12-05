@@ -40,6 +40,10 @@ Berdasarkan tabel tersebut, maka rangkaian subnet yang akan kita gunakan adalah 
 | Heiter-Switch8-Sein-Switch8-RiegelCanyon | A21 | 512 | /22 |
 | Total Jumlah IP | | 4255 | /19 |
 
+Sehingga untuk pembagian IP Addressnya adalah seperti ini
+
+![Alt text](<Screenshot 2023-12-05 162932.png>)
+
 Dan untuk tree nya adalah sebagai berikut
 
 ![Alt text](<Tree VLSM IT20.png>)
@@ -287,6 +291,108 @@ Kemudian kita akan melakukan testing dengan cara mengirim paket dari suatu **nod
 ![Alt text](<Screenshot 2023-12-05 162702.png>)
 
 Seharusnya jika konfigurasi yang digunakan sudah benar, maka semua node dapat mengirim paket ke node yang berada tepat di sebelahnya atau di satu subnet yang sama.
+
+#### 4. Menghubungkan satu subnet dengan subnet lainnya di Cisco Packet Tracer
+
+Setelah semua node terhubung satu sama lain, selanjutnya kita akan menghubungkan semua subnet yang ada dalam topologi atau melakukan Routing. Untuk konfigurasi routingnya adalah sebagai berikut
+
+### Aura
+```
+- A4
+Network  : 192.243.24.64
+Mask     : 255.255.255.224
+Next Hop : 192.243.24.118
+
+- A2
+Network  : 192.243.23.0
+Mask     : 255.255.255.0
+Next Hop : 192.243.24.114
+
+- A8
+Network  : 192.243.0.0
+Mask     : 255.255.248.0
+Next Hop : 192.243.24.118
+
+- A6
+Network  : 192.243.8.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.118
+
+- A10
+Network  : 192.243.24.96
+Mask     : 255.255.255.248
+Next Hop : 192.243.24.118
+
+- A12
+Network  : 192.243.24.136
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.122
+
+- A13
+Network  : 192.243.24.104
+Mask     : 255.255.255.248
+Next Hop : 192.243.24.122
+
+- A15
+Network  : 192.243.12.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.122
+
+- A15
+Network  : 192.243.12.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.122
+
+- A16
+Network  : 192.243.22.0
+Mask     : 255.255.255.0
+Next Hop : 192.243.24.122
+
+- A18
+Network  : 192.243.20.0
+Mask     : 255.255.254.0
+Next Hop : 192.243.24.122
+
+- A20
+Network  : 192.243.24.0
+Mask     : 255.255.255.192
+Next Hop : 192.243.24.122
+
+- A21
+Network  : 192.243.16.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.122
+
+- A5
+Network  : 192.243.24.124
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.118
+
+- A7
+Network  : 192.243.24.128
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.118
+
+- A9
+Network  : 192.243.24.132
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.118
+
+- A14
+Network  : 192.243.24.140
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.122
+
+- A17
+Network  : 192.243.24.144
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.122
+
+- A17
+Network  : 192.243.24.148
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.122
+```
 
 ## *GNS menggunakan CIDR*
 
