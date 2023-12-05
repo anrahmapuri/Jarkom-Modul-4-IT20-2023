@@ -7,6 +7,7 @@
 > 
 
 ## CPT *menggunakan VLSM*
+- Menentukan jumlah subnet awal pada topologi, seperti gambar berikut :
 
 ## *GNS menggunakan CIDR*
 
