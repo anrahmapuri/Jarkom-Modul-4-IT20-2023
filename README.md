@@ -393,6 +393,111 @@ Network  : 192.243.24.148
 Mask     : 255.255.255.252
 Next Hop : 192.243.24.122
 ```
+### Denken
+```
+- A2 > A1
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.113
+```
+
+### Frieren
+```
+- A4 > A3
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.117
+
+- A8
+Network  : 192.243.0.0
+Mask     : 255.255.248.0
+Next Hop : 192.243.24.126
+
+- A6
+Network  : 192.243.8.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.126
+
+- A10
+Network  : 192.243.24.96
+Mask     : 255.255.255.248
+Next Hop : 192.243.24.126
+
+- A7
+Network  : 192.243.24.128
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.126
+
+- A9
+Network  : 192.243.24.132
+Mask     : 255.255.255.252
+Next Hop : 192.243.24.126
+```
+
+### Flamme
+```
+- A6 > A5
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.125
+
+- A8
+Network  : 192.243.0.0
+Mask     : 255.255.248.0
+Next Hop : 192.243.24.130
+
+- A10
+Network  : 192.243.24.96
+Mask     : 255.255.255.248
+Next Hop : 192.243.24.134
+```
+
+### Fern
+```
+- A8 > A7
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.129
+```
+
+### Himmel
+```
+- A10 > A9
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.133
+```
+---
+### Lugner
+```
+- A15 & A16 > A14
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.141
+```
+
+### Heiter
+```
+- A21 > A20
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.1
+```
+
+### Lawine
+```
+- A20 > A19
+Network  : 0.0.0.0
+Mask     : 0.0.0.0
+Next Hop : 192.243.24.149
+
+- A21
+Network  : 192.243.16.0
+Mask     : 255.255.252.0
+Next Hop : 192.243.24.3
+```
+
+
 
 ## *GNS menggunakan CIDR*
 
