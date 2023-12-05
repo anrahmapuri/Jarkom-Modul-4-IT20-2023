@@ -7,7 +7,286 @@
 > 
 
 ## CPT *menggunakan VLSM*
-- Menentukan jumlah subnet awal pada topologi, seperti gambar berikut :
+
+### 1. Menentukan jumlah subnet pada topologi
+Langkah pertama yang harus dilakukan adalah menentukan jumlah subnet dan juga nama subnet yang akan digunakan, kita akan menggunakan tabel berikut sebagai acuan
+
+![Alt text](<Screenshot 2023-12-05 155105.png>)
+
+Berdasarkan tabel tersebut, maka rangkaian subnet yang akan kita gunakan adalah sebagai berikut
+
+| Rute | Subnet | Jumlah IP  | Length |
+| --- | --- | --- | --- |
+| Fern-Switch4-LaubHills-Switch4-AppetitRegion | A8  | 1023 | /21 |
+| Fern-Flamme | A7 | 2 | /30 |
+| Flamme-Switch5-RohrRoad | A6 | 1001 | /22 |
+| Flamme-Himmel | A9 | 2 | /30 |
+| Himmel-Switch6-SchwerMountains | A10 | 6 | /29 |
+| Flamme-Frieren | A5 | 2 | /30 |
+| Frieren-Switch3-LakeKorridor | A4 | 25 | /27 |
+| Frieren-Aura | A3 | 2 | /30 |
+| Aura-Denken | A1 | 2 | /30 |
+| Denken-Switch2-RoyalCapital-Switch2-WileRegion | A2 | 127 | /24 |
+| Aura-Eisen | A11 | 2 | /30 |
+| Eisen-Switch1-Richter-Switch1-Revolte | A13 | 3 | /29 |
+| Eisen-Switch0-Stark | A12 | 2 | /30 |
+| Eisen-Lugner | A14 | 2 | /30 |
+| Lugner-Switch10-TurkRegion | A15 | 1001 | /22 |
+| Lugner-Switch9-GrobeForest | A16 | 251 | /24 |
+| Eisen-Linie | A17 | 2 | /30 |
+| Linie-Switch11-GranzChannel | A18 | 255 | /23 |
+| Linie-Lawine | A19 | 2 | /30 |
+| Lawine-Switch7-Heiter-Switch7-BredtRegion | A20 | 31 | /26 |
+| Heiter-Switch8-Sein-Switch8-RiegelCanyon | A21 | 512 | /22 |
+| Total Jumlah IP | | 4255 | /19 |
+
+Dan untuk tree nya adalah sebagai berikut
+
+![Alt text](<Tree VLSM IT20.png>)
+
+### 2. Membuat Topologi pada Cisco Packet Tracer
+
+Langkah selanjutnya adalah membuat topologi sesuai dengan tabel yang kita pakai diatas, sehingga menjadi seperti ini
+
+![Alt text](<Screenshot 2023-12-05 160152.png>)
+
+Untuk Router jangan lupa untuk menambahkan modul **NM-2FE2W**
+
+![Alt text](<Screenshot 2023-12-05 155850.png>)
+
+Periksa kembali konfigurasi, dan pastikan semua router sudah dalam kondisi ON atau menyala
+
+### 3. Melakukan Konfigurasi pada Cisco Packet Tracer
+Untuk menghubungkan router dengan router lainnya, maupun dengan subnet, perlu dilakukan konfigurasi pada interface masing-masing komponen, untuk konfigurasinya adalah sebagai berikut 
+
+### Aura
+```
+- FE0/1
+IPv4    : 192.243.24.113
+Netmask : 255.255.255.252
+
+- FE1/0
+IPv4    : 192.243.24.117
+Netmask : 255.255.255.252
+
+- FE1/1
+IPv4    : 192.243.24.121
+Netmask : 255.255.255.252
+```
+
+### Denken
+```
+- FE0/0
+IPv4    : 192.243.24.114
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.23.1
+Netmask : 255.255.255.0
+```
+
+### RoyalCapital
+```
+IPv4    : 192.243.23.2
+Netmask : 255.255.255.0
+Gateway : 192.243.23.1
+```
+### WilleRegion
+```
+IPv4    : 192.243.23.3
+Netmask : 255.255.255.0
+Gateway : 192.243.23.1
+```
+
+### Frieren
+```
+- FE0/0
+IPv4    : 192.243.24.118
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.24.65
+Netmask : 255.255.255.252
+```
+### LakeKorridor
+```
+IPv4    : 192.243.24.66
+Netmask : 255.255.255.224
+Gateway : 192.243.24.65
+```
+
+### Flamme
+```
+- FE0/0
+IPv4    : 192.243.24.126
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.24.129
+Netmask : 255.255.255.252
+
+- FE1/0
+IPv4    : 192.243.24.133
+Netmask : 255.255.255.252
+
+- FE1/1
+IPv4    : 192.243.8.1
+Netmask : 255.255.252.0
+```
+### RohrRoad
+```
+IPv4    : 192.243.8.2
+Netmask : 255.255.252.0
+Gateway : 192.243.8.1
+```
+
+### Fern
+```
+- FE0/0
+IPv4    : 192.243.24.130
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.0.1
+Netmask : 255.255.248.0
+```
+### LaubHills
+```
+IPv4    : 192.243.0.2
+Netmask : 255.255.248.0
+Gateway : 192.243.0.1
+```
+### AppetitRegion
+```
+IPv4    : 192.243.0.3
+Netmask : 255.255.248.0
+Gateway : 192.243.0.1
+```
+
+### Himmel
+```
+- FE0/0
+IPv4    : 192.243.24.134
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.24.97
+Netmask : 255.255.255.248
+```
+### SchwerMountains
+```
+IPv4    : 192.243.24.98
+Netmask : 255.255.255.248
+Gateway : 192.243.24.97
+```
+
+### Eisen
+```
+- FE0/0
+IPv4    : 192.243.24.122
+Netmask : 255.255.255.252
+
+- FE1/0
+IPv4    : 192.243.24.105
+Netmask : 255.255.255.248
+
+- FE2/0
+IPv4    : 192.243.24.141
+Netmask : 255.255.255.252
+
+- FE3/0
+IPv4    : 192.243.24.145
+Netmask : 255.255.255.252
+
+- FE4/0
+IPv4    : 192.243.24.137
+Netmask : 255.255.255.252
+```
+### Stark
+```
+IPv4    : 192.243.24.138
+Netmask : 255.255.255.252
+Gateway : 192.243.24.137
+```
+### Richter
+```
+IPv4    : 192.243.24.106
+Netmask : 255.255.255.248
+Gateway : 192.243.24.105
+```
+### Revolte
+```
+IPv4    : 192.243.24.107
+Netmask : 255.255.255.248
+Gateway : 192.243.24.105
+```
+
+### Linie
+```
+- FE0/0
+IPv4    : 192.243.24.146
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.20.1
+Netmask : 255.255.254.0
+
+- FE1/0
+IPv4    : 192.243.24.149
+Netmask : 255.255.255.252
+```
+### GranzChannel
+```
+IPv4    : 192.243.20.2
+Netmask : 255.255.254.0
+Gateway : 192.243.20.1
+```
+
+### Lawine
+```
+- FE0/0
+IPv4    : 192.243.24.150
+Netmask : 255.255.255.252
+
+- FE0/1
+IPv4    : 192.243.24.1
+Netmask : 255.255.255.192
+```
+### BredtRegion
+```
+IPv4    : 192.243.24.2
+Netmask : 255.255.255.192
+Gateway : 192.243.24.1
+```
+
+### Heiter
+```
+- FE0/0
+IPv4    : 192.243.24.3
+Netmask : 255.255.255.192
+
+- FE0/1
+IPv4    : 192.243.16.1
+Netmask : 255.255.252.0
+```
+### Sein
+```
+IPv4    : 192.243.16.2
+Netmask : 255.255.252.0
+Gateway : 192.243.16.1
+```
+### RiegelCanyon
+```
+IPv4    : 192.243.16.3
+Netmask : 255.255.252.0
+Gateway : 192.243.16.1
+```
+
+Kemudian kita akan melakukan testing dengan cara mengirim paket dari suatu **node** ke **node tetangga nya**
+
+![Alt text](<Screenshot 2023-12-05 162702.png>)
+
+Seharusnya jika konfigurasi yang digunakan sudah benar, maka semua node dapat mengirim paket ke node yang berada tepat di sebelahnya atau di satu subnet yang sama.
 
 ## *GNS menggunakan CIDR*
 
@@ -17,7 +296,7 @@
     
     ![Untitled](image/Untitled.png)
     
-    | Rute | Subnet | Jumlah IP  | Lenght |
+    | Rute | Subnet | Jumlah IP  | Length |
     | --- | --- | --- | --- |
     | Fern-Switch4-LaubHills-Switch4-AppetitRegion | A8  | 1023 | /21 |
     | Fern-Flamme | A7 | 2 | /30 |
@@ -92,7 +371,7 @@
     
     Berdasarkan total IP dan netmask yang dibutuhkan, Subnet besar yang dibentuk memiliki `NID 192.243.0.0` dengan `Length /14`. 
     
-    ### **Menghitung pembagian IP berdasarkan `NID` dan `Lenght` yang didapatkan**
+    ### **Menghitung pembagian IP berdasarkan `NID` dan `Length` yang didapatkan**
     
     ![Untitled](image/Untitled%2017.png)
     
