@@ -11,7 +11,7 @@
 ### 1. Menentukan jumlah subnet pada topologi
 Langkah pertama yang harus dilakukan adalah menentukan jumlah subnet dan juga nama subnet yang akan digunakan, kita akan menggunakan tabel berikut sebagai acuan
 
-![Alt text](<Screenshot 2023-12-05 155105.png>)
+![Alt text](<image/Screenshot 2023-12-05 155105.png>)
 
 Berdasarkan tabel tersebut, maka rangkaian subnet yang akan kita gunakan adalah sebagai berikut
 
@@ -42,21 +42,21 @@ Berdasarkan tabel tersebut, maka rangkaian subnet yang akan kita gunakan adalah 
 
 Sehingga untuk pembagian IP Addressnya adalah seperti ini
 
-![Alt text](<Screenshot 2023-12-05 162932.png>)
+![Alt text](<image/Screenshot 2023-12-05 162932.png>)
 
 Dan untuk tree nya adalah sebagai berikut
 
-![Alt text](<Tree VLSM IT20.png>)
+![Alt text](<image/Tree VLSM IT20.png>)
 
 ### 2. Membuat Topologi pada Cisco Packet Tracer
 
 Langkah selanjutnya adalah membuat topologi sesuai dengan tabel yang kita pakai diatas, sehingga menjadi seperti ini
 
-![Alt text](<Screenshot 2023-12-05 160152.png>)
+![Alt text](<image/Screenshot 2023-12-05 160152.png>)
 
 Untuk Router jangan lupa untuk menambahkan modul **NM-2FE2W**
 
-![Alt text](<Screenshot 2023-12-05 155850.png>)
+![Alt text](<image/Screenshot 2023-12-05 155850.png>)
 
 Periksa kembali konfigurasi, dan pastikan semua router sudah dalam kondisi ON atau menyala
 
@@ -288,7 +288,7 @@ Gateway : 192.243.16.1
 
 Kemudian kita akan melakukan testing dengan cara mengirim paket dari suatu **node** ke **node tetangga nya**
 
-![Alt text](<Screenshot 2023-12-05 162702.png>)
+![Alt text](<image/Screenshot 2023-12-05 162702.png>)
 
 Seharusnya jika konfigurasi yang digunakan sudah benar, maka semua node dapat mengirim paket ke node yang berada tepat di sebelahnya atau di satu subnet yang sama.
 
@@ -568,6 +568,24 @@ Mask     : 0.0.0.0
 Next Hop : 192.243.24.1
 ```
 
+### 5. Testing Topologi
+Setelah melakukan routing, langkah selanjutnya adalah testing untuk memeriksa apakah semua komponen di jaringan sudah terhubung dengan satu sama lain
+
+Untuk testing yang digunakan di percobaan ini adalah sebagai berikut
+
+```
+Sein - Richter
+GranzChannel - Turk Region
+RiegelCanyon - Aura
+Fern - Linie
+RoyalCapital - LaubHills
+Heiter - Denken
+SchwerMountains - Lugner
+```
+
+Dan hasilnya adalah sebagai berikut
+![Alt text](<image/Screenshot 2023-12-06 163044.png>)
+![Alt text](<image/Screenshot 2023-12-06 163141.png>)
 ## *GNS menggunakan CIDR*
 
 ### *Penggabungan IP*
