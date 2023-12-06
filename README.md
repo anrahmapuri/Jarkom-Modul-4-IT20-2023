@@ -570,13 +570,13 @@ Next Hop : 192.243.24.1
 
 ## *GNS menggunakan CIDR*
 
-### Penggabungan IP
+### *Penggabungan IP*
 
 - Menentukan jumlah subnet awal pada topologi, seperti gambar berikut :
     
     ![Untitled](image/Untitled.png)
     
-    | Rute | Subnet | Jumlah IP  | Length |
+    | Rute | Subnet | Jumlah IP  | Lenght |
     | --- | --- | --- | --- |
     | Fern-Switch4-LaubHills-Switch4-AppetitRegion | A8  | 1023 | /21 |
     | Fern-Flamme | A7 | 2 | /30 |
@@ -648,13 +648,269 @@ Next Hop : 192.243.24.1
         
         ![Untitled](image/Untitled%2016.png)
         
+        Berdasarkan total IP dan netmask yang dibutuhkan, Subnet besar yang dibentuk memiliki `NID 192.243.0.0` dengan `Netmask /14`. 
+        
+
+### *Perhitungan dan Pembagian IP  *****
+
+Menghitung pembagian IP berdasarkan `NID` dan `Netmask` yang didapatkan : 
+
+![Untitled](image/Untitled%2017.png)
+
+Berdasarkan tree di atas serta perhitungan yang ada, dapat disimpulkan pembagian IP pada masing masing subnet sebagai berikut : 
+
+![Untitled](image/Untitled%2018.png)
+
+### *Routing*  ****
+
+Untuk menghubungkan perangkat-perangkat dalam topologi jaringan, perlu dilakukan konfigurasi jaringan pada masing-mfv wasing interface perangkat. Konfigurasi jaringan ini meliputi pengaturan alamat IP, subnet mask, dan gateway.
+
+![Untitled](image/Untitled%2019.png)
+
+- Aura
     
-    Berdasarkan total IP dan netmask yang dibutuhkan, Subnet besar yang dibentuk memiliki `NID 192.243.0.0` dengan `Length /14`. 
+    ```bash
+    #Aura
+    auto eth0
+    iface eth0 inet dhcp
     
-    ### **Menghitung pembagian IP berdasarkan `NID` dan `Length` yang didapatkan**
+    #A11 Aura-Eisen
+    auto eth1
+    iface eth1 inet static
+    	address 192.245.128.1
+    	netmask 255.255.255.252
     
-    ![Untitled](image/Untitled%2017.png)
+    #A1 Aura-Denken
+    auto eth2
+    iface eth2 inet static
+    	address 192.244.1.1
+    	netmask 255.255.255.252
     
-    Berdasarkan tree di atas serta perhitungan yang ada, dapat disimpulkan pembagian IP pada masing masing subnet sebagai berikut : 
+    #A3 Aura-Frieren
+    auto eth3
+    iface eth3 inet static
+    	address 192.243.128.1
+    	netmask 255.255.255.252
+    ```
     
-    ![Untitled](image/Untitled%2018.png)
+    ```bash
+    route add -net 192.244.0.0 netmask 255.255.255.0 gw 192.244.1.2
+    route add -net 192.243.192.0 netmask 255.255.255.224 gw 192.243.128.2
+    ```
+    
+- Denken
+    
+    ```bash
+    #A1 Denken-Aura
+    auto eth0
+    iface eth0 inet static
+    	address 192.244.1.2
+    	netmask 255.255.255.252
+    
+    #A2 Denken-Switch-RoyalCapital-Switch-WileRegion
+    auto eth1
+    iface eth1 inet static
+    	address 192.244.0.1
+    	netmask 255.255.255.0
+    ```
+    
+    ```bash
+    route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.244.1.1
+    ```
+    
+- Royal Capital
+    
+    ```bash
+    #RoyalCapital
+    auto eth0
+    iface eth0 inet static
+    	address 192.244.0.2
+    	netmask 255.255.255.0
+        gateway 192.244.0.1
+    ```
+    
+- WillieRegion
+    
+    ```bash
+    #WilleRegion
+    auto eth0
+    iface eth0 inet static
+    	address 192.244.0.3
+    	netmask 255.255.255.0
+        gateway 192.244.0.1
+    ```
+    
+- Eisen
+    
+    ```bash
+    #Eisen
+    #A11 Aura-Eisen
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.128.2
+    	netmask 255.255.255.252
+    
+    #A17 Eisen-Linie
+    auto eth1
+    iface eth1 inet static
+    	address 192.245.96.1
+    	netmask 255.255.255.252
+    
+    #A12 Eisen-Switch0-Stark
+    auto eth2
+    iface eth2 inet static
+    	address 192.245.16.1
+    	netmask 255.255.255.252
+    
+    #A13 Eisen-Switch1-Richter-Switch1-Revolte
+    auto eth3
+    iface eth3 inet static
+    	address 192.245.32.1
+    	netmask 255.255.255.248
+    
+    #A14 Eisen-Lugner
+    auto eth4
+    iface eth4 inet static
+    	address 192.245.8.1
+    	netmask 255.255.255.252
+    ```
+    
+    ```bash
+    route add -net 192.245.0.0 netmask 255.255.255.0 gw 192.245.8.2
+    ```
+    
+- Stark
+    
+    ```bash
+    #Stark A12
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.16.2
+    	netmask 255.255.255.252
+    ```
+    
+- Lugner
+    
+    ```bash
+    #A14 Eisien-Lugner
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.8.2
+    	netmask 255.255.255.252
+    
+    #A15 Lugner-Switch10-TurkRegion
+    auto eth1
+    iface eth1 inet static
+    	address 192.245.0.1
+    	netmask 255.255.252.0
+    
+    #A16 Lugner-Switch9-GrobeForest
+    auto eth2
+    iface eth2 inet static
+    	address 192.245.4.1
+    	netmask 255.255.255.0
+    ```
+    
+    ```bash
+    route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.245.8.1
+    ```
+    
+- TurkRegion
+    
+    ```bash
+    #TurkRegion
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.0.2
+    	netmask 255.255.252.0
+        gateway 192.245.0.1
+    ```
+    
+- GrabForest
+    
+    ```bash
+    #GrobeForest
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.4.2
+    	netmask 255.255.255.0
+        gateway 192.245.4.1
+    ```
+    
+- Ricther
+    
+    ```bash
+    #Ritcher 
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.32.2
+    	netmask 255.255.255.248
+    ```
+    
+- Revolte
+    
+    ```bash
+    #Revolte
+    auto eth0
+    iface eth0 inet static
+    	address 192.245.32.3
+    	netmask 255.255.255.248
+    ```
+    
+- Frieren
+    
+    ```bash
+    #Frieren 
+    #A3 Frieren-Aura
+    auto eth0
+    iface eth0 inet static
+    	address 192.243.128.2
+    	netmask 255.255.255.252
+    
+    #A5 Flamme-Frieren
+    auto eth1
+    iface eth1 inet static
+    	address 192.243.32.1
+    	netmask 255.255.255.252
+    
+    #A4 Frieren-Switch3-LakeKorridor
+    auto eth2
+    iface eth2 inet static
+    	address 192.243.192.1
+    	netmask 255.255.255.224
+    ```
+    
+    ```bash
+    route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.243.128.1
+    ```
+    
+- LaubHills
+    
+    ```bash
+    #LaubHills A4
+    auto eth0
+    iface eth0 inet static
+    	address 192.243.192.2
+    	netmask 255.255.255.224
+    ```
+    
+
+### *Testing*
+
+Dilakukan beberapa testing sebagai berikut:
+
+- `RoyalCapital` →  `Aura`
+    
+    ![Untitled](image/Untitled%2020.png)
+    
+- `Revolte` →  `Eisien`
+    
+    ![Untitled](image/Untitled%2021.png)
+    
+- `GrabForest` → `Lugner`
+    
+    ![Untitled](image/Untitled%2022.png)
+    
+- `HaLakeCoridor` → `Frieren`
+    
+    ![Untitled](image/Untitled%2023.png)
